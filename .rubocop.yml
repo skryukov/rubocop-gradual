@@ -1,0 +1,36 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+  - rubocop-rake
+
+AllCops:
+  TargetRubyVersion: 2.6
+  SuggestExtensions: false
+  NewCops: enable
+  Exclude:
+    - 'spec/fixtures/**/*'
+    - 'vendor/**/*'
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: true
+  EnforcedStyle: double_quotes
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/rubocop-gradual.rb'
+
+RSpec/ExpectOutput:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+    Enabled: false

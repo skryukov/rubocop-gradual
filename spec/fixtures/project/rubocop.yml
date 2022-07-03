@@ -1,0 +1,27 @@
+AllCops:
+  Enabled: false
+
+Layout/EmptyLinesAroundAccessModifier:
+  Enabled: true
+Layout/IndentationConsistency:
+  Enabled: true
+Layout/IndentationWidth:
+  Enabled: true
+Layout/LineLength:
+  Enabled: true
+Lint/UselessAssignment:
+  Enabled: true
+Naming/MethodName:
+  Enabled: true
+Style/Documentation:
+  Enabled: true
+Style/EmptyMethod:
+  Enabled: true
+Style/FrozenStringLiteralComment:
+  Enabled: true
+Style/RegexpLiteral:
+  Enabled: true
+Style/RescueModifier:
+  Enabled: true
+Style/SymbolArray:
+  Enabled: true

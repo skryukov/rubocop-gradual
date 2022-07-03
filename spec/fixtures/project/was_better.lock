@@ -1,0 +1,29 @@
+{
+  "app/controllers/application_controller.rb:1968181156": [
+    [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606]
+  ],
+  "app/controllers/books_controller.rb:2782135345": [
+    [2, 1, 1, "Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.", 177583],
+    [3, 34, 33, "Style/SymbolArray: Use `%i` or `%I` for an array of symbols.", 4040535139],
+    [13, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1786506282],
+    [22, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1812028981],
+    [32, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
+    [46, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
+    [60, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
+    [65, 3, 7, "Layout/EmptyLinesAroundAccessModifier: Keep a blank line before and after `private`.", 1807578568],
+    [67, 1, 4, "Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.", 2085287685],
+    [67, 5, 57, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1215737705],
+    [71, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
+    [72, 1, 4, "Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.", 2085287685],
+    [72, 5, 65, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1739255269]
+  ],
+  "app/models/book.rb:1943755482": [
+    [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
+    [1, 1, 10, "Style/Documentation: Missing top-level documentation comment for `class Book`.", 3515554338],
+    [2, 7, 10, "Naming/MethodName: Use snake_case for method names.", 3866179310],
+    [3, 5, 3, "Lint/UselessAssignment: Useless assignment to variable - `foo`.", 193410979],
+    [3, 11, 3, "Lint/UselessAssignment: Useless assignment to variable - `bar`. Did you mean `baz`?", 193415156],
+    [4, 5, 76, "Style/RescueModifier: Avoid using `rescue` in its modifier form.", 3253570103],
+    [4, 16, 19, "Style/RegexpLiteral: Use `%r` around regular expression.", 4043289893]
+  ]
+}

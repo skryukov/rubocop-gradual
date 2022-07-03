@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift("#{__dir__}/../lib")
+
+require "rubocop-gradual"
+require "benchmark"
+
+exit_status = 0
+cli = RuboCop::Gradual::CLI.new
+
+time = Benchmark.realtime { exit_status = cli.run }
+
+puts "Finished in #{time} seconds" if cli.options[:debug] || cli.options[:display_time]
+
+exit exit_status

@@ -1,0 +1,93 @@
+# frozen_string_literal: true
+
+require_relative "diff"
+require_relative "matcher"
+
+module RuboCop
+  module Gradual
+    class Process
+      # CalculateDiff calculates the difference between two RuboCop Gradual results.
+      module CalculateDiff
+        class << self
+          def call(new_result, old_result)
+            return Diff.new.add_new(new_result.files) if old_result.nil?
+
+            diff_results(new_result, old_result)
+          end
+
+          private
+
+          def diff_results(new_result, old_result)
+            new_files, fixed_files, path_files_match, moved_files_match = split_files(new_result, old_result)
+
+            diff = Diff.new.add_new(new_files).add_fixed(fixed_files)
+            path_files_match.chain(moved_files_match).each do |result_file, old_file|
+              diff_issues(diff, result_file, old_file)
+            end
+
+            diff
+          end
+
+          def split_files(new_result, old_result)
+            path_files_match = Matcher.new(new_result.files, old_result.files, :path)
+            new_or_moved_files = path_files_match.unmatched_keys
+            fixed_or_moved_files = path_files_match.unmatched_values
+
+            moved_files_match = Matcher.new(new_or_moved_files, fixed_or_moved_files, :file_hash)
+            new_files = moved_files_match.unmatched_keys
+            fixed_files = moved_files_match.unmatched_values
+
+            [new_files, fixed_files, path_files_match, moved_files_match]
+          end
+
+          def diff_issues(diff, result_file, old_file)
+            fixed_or_moved_issues = old_file.changed_issues(result_file)
+            new_or_moved_issues = result_file.changed_issues(old_file)
+            moved_issues, fixed_issues = split_issues(fixed_or_moved_issues, new_or_moved_issues)
+
+            diff.add_issues(
+              result_file.path,
+              fixed: fixed_issues,
+              moved: moved_issues,
+              new: new_or_moved_issues - moved_issues,
+              unchanged: result_file.issues - new_or_moved_issues - moved_issues
+            )
+          end
+
+          def split_issues(fixed_or_moved_issues, new_or_moved_issues)
+            possibilities = new_or_moved_issues.dup
+            fixed_issues = []
+            moved_issues = []
+            fixed_or_moved_issues.each do |fixed_or_moved_issue|
+              best = best_possibility(fixed_or_moved_issue, possibilities)
+              next fixed_issues << fixed_or_moved_issue if best.nil?
+
+              moved_issues << possibilities.delete(best)
+            end
+            [moved_issues, fixed_issues]
+          end
+
+          def best_possibility(issue, possible_issues)
+            possibilities = possible_issues.select do |possible_issue|
+              possible_issue.code_hash == issue.code_hash
+            end
+            possibilities.min_by { |possibility| issue.distance(possibility) }
+          end
+
+          def map_same_files(left, right)
+            map_files(left.files, right.files) do |new_file, old_file|
+              new_file.path == old_file.path
+            end
+          end
+
+          def map_files(key_files, value_files)
+            key_files.each_with_object({}) do |key_file, res|
+              same_file = value_files.find { |value_file| yield(key_file, value_file) }
+              res[key_file] = same_file if same_file
+            end
+          end
+        end
+      end
+    end
+  end
+end
