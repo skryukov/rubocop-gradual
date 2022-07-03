@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Gradual RuboCop plugin"
   spec.description = "Gradually improve your code with RuboCop."
-  spec.homepage = "https://github.com/skryukov/paco"
+  spec.homepage = "https://github.com/skryukov/rubocop-gradual"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
 
