@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.1.1] - 2022-07-05
+
 ### Changed
 
 - `parallel` gem is used to speed up results parsing. ([@skryukov])
@@ -23,7 +25,8 @@ and this project adheres to [Semantic Versioning].
 
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/skryukov/rubocop-gradual/commits/v0.1.0
 
 [Keep a Changelog]: https://keepachangelog.com/en/1.0.0/
