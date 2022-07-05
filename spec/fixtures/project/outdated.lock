@@ -6,17 +6,17 @@
     [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
     [1, 1, 21, "Style/Documentation: Missing top-level documentation comment for `class BooksController`.", 2020578605],
     [2, 34, 33, "Style/SymbolArray: Use `%i` or `%I` for an array of symbols.", 4040535139],
-    [12, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1786506282],
-    [21, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1812028981],
+    [12, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1838757028],
+    [21, 3, 14, "Style/EmptyMethod: Put empty method definitions on a single line.", 1835812475],
     [31, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
     [45, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
     [59, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
     [64, 3, 7, "Layout/EmptyLinesAroundAccessModifier: Keep a blank line before and after `private`.", 1807578568],
     [66, 1, 4, "Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.", 2085287685],
-    [66, 5, 57, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1215737705],
+    [66, 5, 57, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1468944780],
     [70, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604],
     [71, 1, 4, "Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.", 2085287685],
-    [71, 5, 65, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1739255269]
+    [71, 5, 65, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1981439488]
   ],
   "app/models/book.rb:1943755482": [
     [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
