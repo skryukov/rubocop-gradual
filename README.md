@@ -8,9 +8,7 @@ RuboCop Gradual is a tool that helps track down and fix RuboCop offenses in your
 RuboCop Gradual:
 
 - generates the lock file with all RuboCop offenses and uses hashes to track each offense **line by line**
-
 - **automatically** updates the lock file on every successful run, but returns errors on new offenses
-
 - does not prevent your editor from **showing ignored offenses**
 
 Gain full control of gradual improvements: just add `rubocop-gradual` and use it as proxy for `rubocop`.
@@ -38,11 +36,8 @@ Run `rubocop-gradual` before commiting changes to update the lock file. RuboCop 
 Proposed workflow:
 
 - Run `rubocop-gradual` to generate a lock file and commit it to the project repository.
-
 - Add `rubocop-gradual --CI` to your CI pipeline instead of `rubocop`/`standard`. It will throw an error if the lock file is out of date.
-
 - Optionally, add `rubocop-gradual` as a pre-commit hook to your repository (using [lefthook], for example).
-
 - RuboCop Gradual will throw an error on any new offense, but if you really want to force update the lock file, run `rubocop-gradual --update`.
 
 ## Available options
