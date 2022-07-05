@@ -5,6 +5,16 @@
 
 RuboCop Gradual is a tool that helps track down and fix RuboCop offenses in your code gradually. It's a more flexible alternative to RuboCop's `--auto-gen-config` option.
 
+RuboCop Gradual:
+
+- generates the lock file with all RuboCop offenses and uses hashes to track each offense **line by line**
+
+- **automatically** updates the lock file on every successful run, but returns errors on new offenses
+
+- does not prevent your editor from **showing ignored offenses**
+
+Gain full control of gradual improvements: just add `rubocop-gradual` and use it as proxy for `rubocop`.
+
 <a href="https://evilmartians.com/?utm_source=rubocop-gradual&utm_campaign=project_page">
 <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
