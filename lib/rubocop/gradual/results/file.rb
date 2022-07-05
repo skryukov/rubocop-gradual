@@ -35,8 +35,18 @@ module RuboCop
         def issue_hash(issue)
           return issue[:hash] if issue[:hash]
 
-          code = data.lines[issue[:line] - 1..].join("\n")[issue[:column] - 1, issue[:length]]
-          djb2a(code)
+          djb2a(fetch_code(issue[:line] - 1, issue[:column] - 1, issue[:length]))
+        end
+
+        def fetch_code(line, column, length)
+          code = ""
+          data.each_line.lazy.drop(line).each_with_index do |str, index|
+            from = index.zero? ? column : 0
+            length = index.zero? ? length : length - code.length
+            code += str[from, length]
+
+            return code if code.length >= length
+          end
         end
 
         def data

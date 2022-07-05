@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed multiline issues hash calculation. ([@skryukov])
+
 ## [0.1.0] - 2022-07-03
 
 ### Added
