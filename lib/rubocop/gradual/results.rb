@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "parallel"
+
 require_relative "results/file"
 
 module RuboCop
@@ -9,7 +11,7 @@ module RuboCop
       attr_reader :files
 
       def initialize(files:)
-        @files = files.map { |file| File.new(**file) }.sort
+        @files = Parallel.map(files) { |file| File.new(**file) }.sort
       end
     end
   end

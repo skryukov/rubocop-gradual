@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Changed
+
+- `parallel` gem is used to speed up results parsing. ([@skryukov])
+
 ### Fixed
 
 - Fixed multiline issues hash calculation. ([@skryukov])

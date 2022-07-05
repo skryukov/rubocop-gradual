@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "diff-lcs", ">= 1.2.0", "< 2.0"
   spec.add_dependency "diffy", "~> 3.0"
+  spec.add_dependency "parallel", "~> 1.10"
   spec.add_dependency "rainbow", ">= 2.2.2", "< 4.0"
   spec.add_dependency "rubocop", "~> 1.0"
 end
