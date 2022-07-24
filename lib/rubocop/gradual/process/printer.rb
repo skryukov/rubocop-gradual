@@ -10,7 +10,7 @@ module RuboCop
         end
 
         def print_results
-          puts diff.statistics if RuboCop::Gradual.debug
+          puts diff.statistics if Configuration.debug?
 
           send "print_#{diff.state}"
         end
@@ -23,7 +23,7 @@ module RuboCop
             - Run `rubocop-gradual` locally and commit the results, or
             - EVEN BETTER: before doing the above, try to fix the remaining issues in those files!
 
-            #{bold("`#{Gradual.path}` diff:")}
+            #{bold("`#{Configuration.path}` diff:")}
 
             #{diff.to_s(ARGV.include?("--no-color") ? :text : :color)}
           MSG
@@ -35,7 +35,7 @@ module RuboCop
 
         def print_complete
           puts bold("RuboCop Gradual is complete!")
-          puts "Removing `#{Gradual.path}` lock file..."
+          puts "Removing `#{Configuration.path}` lock file..." if diff.statistics[:fixed].positive?
         end
 
         def print_updated
@@ -49,7 +49,7 @@ module RuboCop
         def print_new
           issues_left = diff.statistics[:left]
           puts bold("RuboCop Gradual got results for the first time. #{issues_left} issue(s) found.")
-          puts "Don't forget to commit `#{Gradual.path}` log file."
+          puts "Don't forget to commit `#{Configuration.path}` log file."
         end
 
         def print_better
@@ -61,7 +61,7 @@ module RuboCop
         def print_worse
           puts bold("Uh oh, RuboCop Gradual got worse:")
           print_new_issues
-          puts bold("Force updating lock file...") if Gradual.mode == :update
+          puts bold("Force updating lock file...") if Configuration.mode == :force_update
         end
 
         def print_new_issues

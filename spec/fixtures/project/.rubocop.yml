@@ -1,5 +1,5 @@
 AllCops:
-  Enabled: false
+  DisabledByDefault: true
 
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: true

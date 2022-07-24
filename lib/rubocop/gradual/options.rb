@@ -1,61 +1,79 @@
 # frozen_string_literal: true
 
-require "rainbow"
 require "shellwords"
 
 module RuboCop
   module Gradual
     # Options class defines RuboCop Gradual cli options.
-    # It also extracts command line RuboCop Gradual arguments
-    # before passing leftover arguments to RuboCop::CLI.
     class Options
+      AUTOCORRECT_KEY =
+        if Gem::Version.new(RuboCop::Version::STRING) >= Gem::Version.new("1.30")
+          :autocorrect
+        else
+          :auto_correct
+        end
+
+      def initialize
+        @options = {}
+      end
+
       def parse(args)
         parser = define_options
-        @gradual_args, @rubocop_args = filter_args(parser, args_from_file + args)
-        parser.parse(@gradual_args)
-        @rubocop_args
+        gradual_args, rubocop_args = filter_args(parser, args_from_file + args)
+        @rubocop_options, _rubocop_paths = RuboCop::Options.new.parse(rubocop_args)
+        parser.parse(gradual_args)
+
+        [@options, @rubocop_options]
       end
 
       private
 
       def define_options
         OptionParser.new do |opts|
-          opts.banner = rainbow.wrap("\nGradual options:").bright
-
+          define_mode_options(opts)
           define_gradual_options(opts)
 
-          define_proxy_options(opts)
+          define_info_options(opts)
+        end
+      end
+
+      def define_mode_options(opts)
+        opts.on("-U", "--force-update", "Force update Gradual lock file.") { @options[:mode] = :force_update }
+        opts.on("-u", "--update", "Same as --force-update (deprecated).") do
+          warn "-u, --update is deprecated. Use -U, --force-update instead."
+          @options[:mode] = :force_update
+        end
+
+        opts.on("--check", "Check Gradual lock file is up-to-date.") { @options[:mode] = :check }
+        opts.on("--ci", "Same as --check (deprecated).") do
+          warn "--ci is deprecated. Use --check instead."
+          @options[:mode] = :check
         end
       end
 
       def define_gradual_options(opts)
-        opts.on("-u", "--update", "Force update Gradual lock file.") { Gradual.mode = :update }
+        opts.on("-a", "--autocorrect", "Autocorrect offenses (only when it's safe).") do
+          @rubocop_options[AUTOCORRECT_KEY] = true
+          @rubocop_options[:"safe_#{AUTOCORRECT_KEY}"] = true
+          @options[:command] = :autocorrect
+        end
+        opts.on("-A", "--autocorrect-all", "Autocorrect offenses (safe and unsafe).") do
+          @rubocop_options[AUTOCORRECT_KEY] = true
+          @options[:command] = :autocorrect
+        end
 
-        opts.on("--ci", "Run Gradual in the CI mode.") { Gradual.mode = :ci }
-
-        opts.on("--gradual-file FILE", "Specify Gradual lock file.") { |path| Gradual.path = path }
-
-        opts.on("--no-gradual", "Disable Gradual.") { Gradual.mode = :disabled }
+        opts.on("--gradual-file FILE", "Specify Gradual lock file.") { |path| @options[:path] = path }
       end
 
-      def define_proxy_options(opts)
-        proxy_option(opts, "-v", "--version", "Display version.") do
-          print "rubocop-gradual: #{VERSION}\nrubocop: "
+      def define_info_options(opts)
+        opts.on("-v", "--version", "Display version.") do
+          puts "rubocop-gradual: #{VERSION}, rubocop: #{RuboCop::Version.version}"
+          exit
         end
 
-        proxy_option(opts, "-V", "--verbose-version", "Display verbose version.") do
-          print "rubocop-gradual: #{VERSION}\nrubocop:"
-        end
-
-        proxy_option(opts, "-h", "--help", "Display help message.") do
-          at_exit { puts opts }
-        end
-      end
-
-      def proxy_option(opts, *attrs)
-        opts.on(*attrs) do
-          @rubocop_args << attrs[0]
-          yield
+        opts.on("-h", "--help", "Prints this help.") do
+          puts opts
+          exit
         end
       end
 
@@ -84,12 +102,6 @@ module RuboCop
           File.read(".rubocop-gradual").shellsplit
         else
           []
-        end
-      end
-
-      def rainbow
-        @rainbow ||= Rainbow.new.tap do |r|
-          r.enabled = false if ARGV.include?("--no-color")
         end
       end
     end

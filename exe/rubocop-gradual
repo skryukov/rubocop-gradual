@@ -11,6 +11,6 @@ cli = RuboCop::Gradual::CLI.new
 
 time = Benchmark.realtime { exit_status = cli.run }
 
-puts "Finished in #{time} seconds" if cli.options[:debug] || cli.options[:display_time]
+puts "Finished in #{time} seconds" if RuboCop::Gradual::Configuration.display_time?
 
 exit exit_status

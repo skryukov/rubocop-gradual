@@ -54,7 +54,7 @@ module RuboCop
             new: new,
             unchanged: unchanged
           }
-          log_file_issues(path) if RuboCop::Gradual.debug
+          log_file_issues(path) if Configuration.debug?
           self
         end
 
