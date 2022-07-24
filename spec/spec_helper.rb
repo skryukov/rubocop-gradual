@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "tmpdir"
+
 require "rubocop/gradual"
 
 RSpec.configure do |config|
@@ -16,5 +18,7 @@ RSpec.configure do |config|
   config.order = :random
   Kernel.srand config.seed
 
-  config.after { RuboCop::Gradual.set_defaults! }
+  config.after do
+    RuboCop::Gradual::Configuration.apply
+  end
 end

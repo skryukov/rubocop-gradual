@@ -35,21 +35,23 @@ Run `rubocop-gradual` before commiting changes to update the lock file. RuboCop 
 
 Proposed workflow:
 
+- Remove `rubocop_todo.yml` if it exists.
 - Run `rubocop-gradual` to generate a lock file and commit it to the project repository.
-- Add `rubocop-gradual --CI` to your CI pipeline instead of `rubocop`/`standard`. It will throw an error if the lock file is out of date.
+- Add `rubocop-gradual --check` to your CI pipeline instead of `rubocop`/`standard`. It will throw an error if the lock file is out of date.
+- Run `rubocop-gradual` to update the lock file, or `rubocop-gradual -a` to run autocorrection for all new and changed files and then update the lock file.
 - Optionally, add `rubocop-gradual` as a pre-commit hook to your repository (using [lefthook], for example).
-- RuboCop Gradual will throw an error on any new offense, but if you really want to force update the lock file, run `rubocop-gradual --update`.
+- RuboCop Gradual will throw an error on any new offense, but if you really want to force update the lock file, run `rubocop-gradual --force-update`.
 
 ## Available options
 
 ```
-        --ci                         Run Gradual in the CI mode.
-    -u, --update                     Force update Gradual lock file.
+    -U, --force-update               Force update Gradual lock file.
+        --check                      Check Gradual lock file is up-to-date.
+    -a, --autocorrect                Autocorrect offenses (only when it's safe).
+    -A, --autocorrect-all            Autocorrect offenses (safe and unsafe).
         --gradual-file FILE          Specify Gradual lock file.
-        --no-gradual                 Disable Gradual.
     -v, --version                    Display version.
-    -V, --verbose-version            Display verbose version.
-    -h, --help                       Display help message.
+    -h, --help                       Prints this help.
 ```
 
 ## Alternatives

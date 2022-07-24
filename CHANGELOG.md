@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+- Add autocorrection options. ([@skryukov])
+  Run `rubocop-gradual -a` and `rubocop-gradual -A` to autocorrect new and changed files and then update the lock file.
+
+- Rename `--ci` to `--check` option. ([@skryukov])
+
+- Rename `-u, --update` to `-U, --force-update` option. ([@skryukov])
+
 ## [0.1.1] - 2022-07-05
 
 ### Changed
