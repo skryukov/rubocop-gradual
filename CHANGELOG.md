@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.2.0] - 2022-07-26
+
 - Add autocorrection options. ([@skryukov])
   Run `rubocop-gradual -a` and `rubocop-gradual -A` to autocorrect new and changed files and then update the lock file.
 
@@ -32,7 +34,8 @@ and this project adheres to [Semantic Versioning].
 
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/skryukov/rubocop-gradual/commits/v0.1.0
 
