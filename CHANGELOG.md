@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Added
+
+- Built-in Rake tasks. ([@skryukov])
+```ruby
+# Rakefile
+require "rubocop/gradual/rake_task"
+
+RuboCop::Gradual::RakeTask.new
+```
+
 ## [0.2.0] - 2022-07-26
 
 ### Added

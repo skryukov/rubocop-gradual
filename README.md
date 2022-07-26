@@ -54,6 +54,41 @@ Proposed workflow:
     -h, --help                       Prints this help.
 ```
 
+## Rake tasks
+
+To use built-in Rake tasks add the following to your Rakefile:
+
+```ruby
+# Rakefile
+require "rubocop/gradual/rake_task"
+
+RuboCop::Gradual::RakeTask.new
+```
+
+This will add rake tasks:
+
+```
+bundle exec rake -T
+rake rubocop_gradual                  # Run RuboCop Gradual
+rake rubocop_gradual:autocorrect      # Run RuboCop Gradual with autocorrect (only when it's safe)
+rake rubocop_gradual:autocorrect_all  # Run RuboCop Gradual with autocorrect (safe and unsafe)
+rake rubocop_gradual:check            # Run RuboCop Gradual to check the lock file
+rake rubocop_gradual:force_update     # Run RuboCop Gradual to force update the lock file
+```
+
+It's possible to customize the Rake task name and options:
+
+```ruby
+# Rakefile
+
+require "rubocop/gradual/rake_task"
+
+RuboCop::Gradual::RakeTask.new(:custom_task_name) do |task|
+  task.options = %w[--gradual-file custom_gradual_file.lock]
+  task.verbose = false
+end
+```
+
 ## Alternatives
 
 - [RuboCop TODO file]. Comes out of the box with RuboCop. Provides a way to ignore offenses on the file level, which is problematic since it is possible to introduce new offenses without any signal from linter.
