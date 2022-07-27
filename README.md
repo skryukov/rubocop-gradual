@@ -89,6 +89,40 @@ RuboCop::Gradual::RakeTask.new(:custom_task_name) do |task|
 end
 ```
 
+## Require mode (experimental)
+
+RuboCop Gradual can be used in "Require mode", which is a way to replace `rubocop` with `rubocop-gradual`:
+
+```yaml
+# .rubocop.yml
+
+require:
+  - rubocop-gradual
+```
+
+Now base `rubocop` command will run `rubocop-gradual`:
+
+```shell
+rubocop # run `rubocop-gradual`
+rubocop -a # run `rubocop-gradual` with autocorrect (only when it's safe)
+rubocop -A # run `rubocop-gradual` with autocorrect (safe and unsafe)
+rubocop gradual check # run `rubocop-gradual` to check the lock file
+rubocop gradual force_update # run `rubocop-gradual` to force update the lock file
+```
+
+To set a custom path to Gradual lock file, add `--gradual-file FILE` to a special `.rubocop-gradual` file:
+
+```
+# .rubocop-gradual
+--rubocop-gradual-file path/to/my_lock_file.lock
+```
+
+To temporarily disable RuboCop Gradual, prepend command with `NO_GRADUAL=1`:
+
+```shell
+NO_GRADUAL=1 rubocop # run `rubocop`
+```
+
 ## Alternatives
 
 - [RuboCop TODO file]. Comes out of the box with RuboCop. Provides a way to ignore offenses on the file level, which is problematic since it is possible to introduce new offenses without any signal from linter.

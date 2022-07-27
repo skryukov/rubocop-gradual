@@ -10,6 +10,7 @@ AllCops:
   Exclude:
     - 'spec/fixtures/**/*'
     - 'vendor/**/*'
+
 Style/StringLiterals:
   Enabled: true
   EnforcedStyle: double_quotes
