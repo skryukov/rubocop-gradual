@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning].
 
 ### Added
 
+- Require mode (experimental). ([@skryukov])
+
 - Built-in Rake tasks. ([@skryukov])
 ```ruby
 # Rakefile
