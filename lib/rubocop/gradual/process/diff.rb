@@ -33,16 +33,9 @@ module RuboCop
             end
         end
 
-        def add_new(files)
+        def add_files(files, key)
           files.each do |file|
-            add_issues(file.path, new: file.issues)
-          end
-          self
-        end
-
-        def add_fixed(files)
-          files.each do |file|
-            add_issues(file.path, fixed: file.issues)
+            add_issues(file.path, **{ key => file.issues })
           end
           self
         end

@@ -13,7 +13,7 @@ module RuboCop
             RuboCop::CLI::Environment.new(
               Configuration.rubocop_options.merge(formatters: [[Formatters::Autocorrect, nil]]),
               Configuration.rubocop_config_store,
-              changed_or_untracked_files.map(&:path)
+              lint_paths
             )
           )
           runner.run
@@ -21,6 +21,12 @@ module RuboCop
         end
 
         private
+
+        def lint_paths
+          return Configuration.target_file_paths if Configuration.lint_paths.any?
+
+          changed_or_untracked_files.map(&:path)
+        end
 
         def changed_or_untracked_files
           tracked_files = LockFile.new(Configuration.path).read_results&.files || []
@@ -31,19 +37,9 @@ module RuboCop
         end
 
         def target_files
-          Parallel.map(rubocop_target_file_paths) do |path|
-            Results::File.new(path: RuboCop::PathUtil.smart_path(path), issues: [])
+          Parallel.map(Configuration.target_file_paths) do |path|
+            Results::File.new(path: path, issues: [])
           end
-        end
-
-        def rubocop_target_file_paths
-          target_finder = RuboCop::TargetFinder.new(Configuration.rubocop_config_store, Configuration.rubocop_options)
-          mode = if Configuration.rubocop_options[:only_recognized_file_types]
-                   :only_recognized_file_types
-                 else
-                   :all_file_types
-                 end
-          target_finder.find([], mode)
         end
       end
     end
