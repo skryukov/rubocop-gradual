@@ -27,10 +27,16 @@ module RuboCop
             RuboCop::CLI::Environment.new(
               rubocop_options,
               Configuration.rubocop_config_store,
-              []
+              lint_paths
             )
           )
           rubocop_runner.run
+        end
+
+        def lint_paths
+          return [] if Configuration.lint_paths.empty?
+
+          Configuration.target_file_paths
         end
 
         def rubocop_options

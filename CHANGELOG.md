@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning].
 
 ### Added
 
+- Partial linting (experimental). ([@skryukov])
+  Partial linting is useful when you want to run RuboCop Gradual on a subset of files, for example, on changed files in a pull request:
+```shell
+rubocop-gradual path/to/file # run `rubocop-gradual` on a subset of files
+rubocop-gradual --staged # run `rubocop-gradual` on staged files
+rubocop-gradual --unstaged # run `rubocop-gradual` on unstaged files
+rubocop-gradual --commit origin/main # run `rubocop-gradual` on changed files since the commit
+
+# it's possible to combine options with autocorrect:
+rubocop-gradual --staged --autocorrect # run `rubocop-gradual` with autocorrect on staged files
+```
+
 - Require mode (experimental). ([@skryukov])
 
 - Built-in Rake tasks. ([@skryukov])

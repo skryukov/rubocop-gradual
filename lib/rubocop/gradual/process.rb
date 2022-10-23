@@ -9,15 +9,17 @@ module RuboCop
   module Gradual
     # Process is a class that handles the processing of RuboCop results.
     class Process
-      attr_reader :new_results, :lock_file
+      attr_reader :lock_file, :old_results, :new_results
 
       def initialize(rubocop_result)
         @lock_file = LockFile.new(Configuration.path)
+        @old_results = lock_file.read_results
         @new_results = Results.new(files: rubocop_result)
+        add_skipped_files_to_new_results!
       end
 
       def call
-        diff = CalculateDiff.call(new_results, lock_file.read_results)
+        diff = CalculateDiff.call(new_results, old_results)
         printer = Printer.new(diff)
 
         printer.print_results
@@ -45,6 +47,13 @@ module RuboCop
         return 1 if diff.state == :worse && Configuration.mode != :force_update
 
         0
+      end
+
+      def add_skipped_files_to_new_results!
+        return if Configuration.lint_paths.none? || old_results.nil?
+
+        skipped_files = old_results.files.reject { |file| Configuration.target_file_paths.include?(file.path) }
+        new_results.files.concat(skipped_files).sort!
       end
     end
   end

@@ -89,6 +89,22 @@ RuboCop::Gradual::RakeTask.new(:custom_task_name) do |task|
 end
 ```
 
+## Partial linting (experimental)
+
+RuboCop Gradual supports partial linting. It's useful when you want to run RuboCop Gradual on a subset of files, for example, on changed files in a pull request:
+
+```shell
+rubocop-gradual path/to/file # run `rubocop-gradual` on a subset of files
+rubocop-gradual --staged # run `rubocop-gradual` on staged files
+rubocop-gradual --unstaged # run `rubocop-gradual` on unstaged files
+rubocop-gradual --commit origin/main # run `rubocop-gradual` on changed files since the commit
+
+# it's possible to combine options with autocorrect:
+rubocop-gradual --staged --autocorrect # run `rubocop-gradual` with autocorrect on staged files
+```
+
+To run
+
 ## Require mode (experimental)
 
 RuboCop Gradual can be used in "Require mode", which is a way to replace `rubocop` with `rubocop-gradual`:

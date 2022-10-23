@@ -10,7 +10,7 @@ module RuboCop
       module CalculateDiff
         class << self
           def call(new_result, old_result)
-            return Diff.new.add_new(new_result.files) if old_result.nil?
+            return Diff.new.add_files(new_result.files, :new) if old_result.nil?
 
             diff_results(new_result, old_result)
           end
@@ -20,7 +20,7 @@ module RuboCop
           def diff_results(new_result, old_result)
             new_files, fixed_files, path_files_match, moved_files_match = split_files(new_result, old_result)
 
-            diff = Diff.new.add_new(new_files).add_fixed(fixed_files)
+            diff = Diff.new.add_files(new_files, :new).add_files(fixed_files, :fixed)
             path_files_match.chain(moved_files_match).each do |result_file, old_file|
               diff_issues(diff, result_file, old_file)
             end
@@ -72,19 +72,6 @@ module RuboCop
               possible_issue.code_hash == issue.code_hash
             end
             possibilities.min_by { |possibility| issue.distance(possibility) }
-          end
-
-          def map_same_files(left, right)
-            map_files(left.files, right.files) do |new_file, old_file|
-              new_file.path == old_file.path
-            end
-          end
-
-          def map_files(key_files, value_files)
-            key_files.each_with_object({}) do |key_file, res|
-              same_file = value_files.find { |value_file| yield(key_file, value_file) }
-              res[key_file] = same_file if same_file
-            end
           end
         end
       end
