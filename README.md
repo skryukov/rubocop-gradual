@@ -103,8 +103,6 @@ rubocop-gradual --commit origin/main # run `rubocop-gradual` on changed files si
 rubocop-gradual --staged --autocorrect # run `rubocop-gradual` with autocorrect on staged files
 ```
 
-To run
-
 ## Require mode (experimental)
 
 RuboCop Gradual can be used in "Require mode", which is a way to replace `rubocop` with `rubocop-gradual`:
