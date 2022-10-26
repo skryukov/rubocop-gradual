@@ -16,7 +16,7 @@ module RuboCop
         end
 
         def <=>(other)
-          [line, column, length] <=> [other.line, other.column, other.length]
+          [line, column, length, message] <=> [other.line, other.column, other.length, other.message]
         end
 
         def to_s
