@@ -111,7 +111,7 @@ RuboCop Gradual can be used in "Require mode", which is a way to replace `ruboco
 # .rubocop.yml
 
 require:
-  - rubocop-gradual
+  - rubocop/gradual/patch
 ```
 
 Now base `rubocop` command will run `rubocop-gradual`:

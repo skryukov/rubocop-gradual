@@ -30,3 +30,5 @@ module RuboCop
     end
   end
 end
+
+RuboCop::CLI.prepend(RuboCop::Gradual::Patch) if ENV["NO_GRADUAL"] != "1"
