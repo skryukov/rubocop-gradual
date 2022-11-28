@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- More straightforward way of including RuboCop patch for Require mode. ([@skryukov])
+
+
 ## [0.3.0] - 2022-10-26
 
 ### Added
