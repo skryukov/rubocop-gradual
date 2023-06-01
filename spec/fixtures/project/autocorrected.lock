@@ -1,6 +1,7 @@
 {
   "app/controllers/application_controller.rb:1968181156": [
-    [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606]
+    [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
+    [1, 1, 27, "Style/Documentation: Missing top-level documentation comment for `class ApplicationController`.", 162509677]
   ],
   "app/controllers/books_controller.rb:4260410131": [
     [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
