@@ -45,8 +45,9 @@ module RuboCop
             length = index.zero? ? length : length - code.length
             code += str[from, length]
 
-            return code if code.length >= length
+            break if code.length >= length
           end
+          code
         end
 
         def data
