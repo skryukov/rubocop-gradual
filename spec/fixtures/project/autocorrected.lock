@@ -8,7 +8,7 @@
     [1, 1, 21, "Style/Documentation: Missing top-level documentation comment for `class BooksController`.", 2020578605],
     [64, 121, 1, "Layout/LineLength: Line is too long. [121/120]", 177604]
   ],
-  "app/models/book.rb:261983263": [
+  "app/models/book.rb:2300652339": [
     [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
     [1, 1, 10, "Style/Documentation: Missing top-level documentation comment for `class Book`.", 3515554338],
     [2, 7, 10, "Naming/MethodName: Use snake_case for method names.", 3866179310],
