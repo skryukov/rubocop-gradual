@@ -23,7 +23,6 @@
     [1, 1, 10, "Style/Documentation: Missing top-level documentation comment for `class Book`.", 3515554338],
     [2, 7, 10, "Naming/MethodName: Use snake_case for method names.", 3866179310],
     [3, 5, 3, "Lint/UselessAssignment: Useless assignment to variable - `foo`.", 193410979],
-    [3, 11, 3, "Lint/UselessAssignment: Useless assignment to variable - `bar`. Did you mean `baz`?", 193415156],
     [4, 5, 76, "Style/RescueModifier: Avoid using `rescue` in its modifier form.", 3253570103],
     [4, 16, 19, "Style/RegexpLiteral: Use `%r` around regular expression.", 4043289893]
   ]

@@ -42,7 +42,7 @@ module RuboCop
           code = ""
           data.each_line.lazy.drop(line).each_with_index do |str, index|
             from = index.zero? ? column : 0
-            length = index.zero? ? length : length - code.length
+            length -= code.length unless index.zero?
             code += str[from, length]
 
             break if code.length >= length

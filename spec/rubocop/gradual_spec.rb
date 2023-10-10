@@ -53,7 +53,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
   it "writes full file for the first time" do
     expect(gradual_cli).to eq(0)
     expect(actual_data).to eq(expected_data)
-    expect($stdout.string).to include("RuboCop Gradual got results for the first time. 23 issue(s) found.")
+    expect($stdout.string).to include("RuboCop Gradual got results for the first time. 22 issue(s) found.")
   end
 
   include_examples "error with --check option"
@@ -134,7 +134,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     it "updates file" do
       expect(gradual_cli).to eq(0)
       expect(actual_data).to eq(expected_data)
-      expect($stdout.string).to include("RuboCop Gradual got 2 issue(s) fixed, 23 left. Keep going!")
+      expect($stdout.string).to include("RuboCop Gradual got 2 issue(s) fixed, 22 left. Keep going!")
     end
 
     include_examples "error with --check option"
@@ -163,7 +163,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       expect(actual_data).to eq(expected_data)
       expect($stdout.string).to include("Inspecting 3 file(s) for autocorrection...")
         .and include("Fixed 2 file(s).")
-        .and include("RuboCop Gradual got 13 issue(s) fixed, 10 left. Keep going!")
+        .and include("RuboCop Gradual got 13 issue(s) fixed, 9 left. Keep going!")
     end
   end
 end
