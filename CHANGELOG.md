@@ -7,12 +7,17 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.3.2] - 2023-10-10
+
+### Fixed
+
+- Handle syntax errors in inspected files. ([@skryukov])
+
 ## [0.3.1] - 2022-11-29
 
 ### Fixed
 
 - More straightforward way of including RuboCop patch for Require mode. ([@skryukov])
-
 
 ## [0.3.0] - 2022-10-26
 
@@ -87,7 +92,8 @@ RuboCop::Gradual::RakeTask.new
 
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.2...HEAD
+[0.3.2]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/skryukov/rubocop-gradual/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/skryukov/rubocop-gradual/compare/v0.1.1...v0.2.0
