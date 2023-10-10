@@ -18,7 +18,7 @@
     [72, 1, 4, "Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.", 2085287685],
     [72, 5, 65, "Layout/IndentationConsistency: Inconsistent indentation detected.", 1981439488]
   ],
-  "app/models/book.rb:1943755482": [
+  "app/models/book.rb:1190628470": [
     [1, 1, 1, "Style/FrozenStringLiteralComment: Missing frozen string literal comment.", 177606],
     [1, 1, 10, "Style/Documentation: Missing top-level documentation comment for `class Book`.", 3515554338],
     [2, 7, 10, "Naming/MethodName: Use snake_case for method names.", 3866179310],
