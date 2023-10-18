@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name = "rubocop-gradual"
   spec.version = RuboCop::Gradual::VERSION
   spec.authors = ["Svyatoslav Kryukov"]
-  spec.email = ["s.g.kryukov@yandex.ru"]
+  spec.email = ["me@skryukov.dev"]
 
   spec.summary = "Gradual RuboCop plugin"
   spec.description = "Gradually improve your code with RuboCop."
