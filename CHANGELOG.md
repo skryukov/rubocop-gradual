@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Throw an error when the `--check` option is used and file hash is outdated. ([@skryukov])
+
 ## [0.3.2] - 2023-10-10
 
 ### Fixed

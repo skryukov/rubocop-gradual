@@ -41,17 +41,18 @@ module RuboCop
           end
 
           def diff_issues(diff, result_file, old_file)
-            fixed_or_moved_issues = old_file.changed_issues(result_file)
-            new_or_moved_issues = result_file.changed_issues(old_file)
-            moved_issues, fixed_issues = split_issues(fixed_or_moved_issues, new_or_moved_issues)
+            fixed_or_moved = old_file.changed_issues(result_file)
+            new_or_moved = result_file.changed_issues(old_file)
+            moved, fixed = split_issues(fixed_or_moved, new_or_moved)
+            new = new_or_moved - moved
+            unchanged = result_file.issues - new - moved
 
-            diff.add_issues(
-              result_file.path,
-              fixed: fixed_issues,
-              moved: moved_issues,
-              new: new_or_moved_issues - moved_issues,
-              unchanged: result_file.issues - new_or_moved_issues - moved_issues
-            )
+            if result_file.file_hash != old_file.file_hash && fixed.empty? && new.empty? && moved.empty?
+              moved = unchanged
+              unchanged = []
+            end
+
+            diff.add_issues(result_file.path, fixed: fixed, moved: moved, new: new, unchanged: unchanged)
           end
 
           def split_issues(fixed_or_moved_issues, new_or_moved_issues)
