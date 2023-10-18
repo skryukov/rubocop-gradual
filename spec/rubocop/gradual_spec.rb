@@ -71,6 +71,19 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     include_examples "error with --check option"
   end
 
+  context "when the lock file is outdated but only by file hash" do
+    let(:actual_lock_path) { File.expand_path("outdated_file.lock") }
+    let(:expected_lock_path) { File.expand_path("full.lock") }
+
+    it "updates file" do
+      expect(gradual_cli).to eq(0)
+      expect(actual_data).to eq(expected_data)
+      expect($stdout.string).to include("RuboCop Gradual got its results updated.")
+    end
+
+    include_examples "error with --check option"
+  end
+
   context "when the lock file is the same" do
     let(:actual_lock_path) { expected_lock_path }
 
