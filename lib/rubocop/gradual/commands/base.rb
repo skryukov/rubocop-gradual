@@ -18,6 +18,9 @@ module RuboCop
           puts "Finished Gradual processing in #{time} seconds" if Configuration.display_time?
 
           exit_code
+        rescue RuboCop::Error => e
+          warn "\nRuboCop Error: #{e.message}"
+          1
         end
 
         private

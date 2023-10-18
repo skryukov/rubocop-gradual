@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning].
 ### Fixed
 
 - Throw an error when the `--check` option is used and file hash is outdated. ([@skryukov])
+- Wrap RuboCop errors to make output more pleasant. ([@skryukov])
 
 ## [0.3.2] - 2023-10-10
 
