@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Use JSON.dump instead of to_json for stable results encoding. ([@skryukov])
+
 ## [0.3.3] - 2023-10-18
 
 ### Fixed
