@@ -20,7 +20,7 @@ module RuboCop
         end
 
         def to_s
-          "[#{[line, column, length, message.to_json, code_hash].join(", ")}]"
+          "[#{[line, column, length, JSON.dump(message), code_hash].join(", ")}]"
         end
 
         def ==(other)
