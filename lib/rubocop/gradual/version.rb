@@ -2,6 +2,6 @@
 
 module RuboCop
   module Gradual
-    VERSION = "0.3.3"
+    VERSION = "0.3.4"
   end
 end

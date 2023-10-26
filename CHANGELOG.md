@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.3.4] - 2023-10-26
+
 ### Fixed
 
 - Use JSON.dump instead of to_json for stable results encoding. ([@skryukov])
@@ -103,7 +105,8 @@ RuboCop::Gradual::RakeTask.new
 
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.4...HEAD
+[0.3.4]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.0...v0.3.1
