@@ -9,23 +9,22 @@ module RuboCop
       def run_command(name)
         return super if name != :execute_runner || (ARGV & %w[--stdin -s]).any?
 
-        Configuration.apply(*parse_options)
-        puts "Gradual mode: #{Configuration.mode}" if Configuration.debug?
-        load_command(Configuration.command).call.to_i
+        RuboCop::Gradual::CLI.new.run(patched_argv)
       end
 
       private
 
-      def load_command(command)
-        require_relative "commands/#{command}"
-        ::RuboCop::Gradual::Commands.const_get(command.to_s.capitalize).new
-      end
+      def patched_argv
+        return ARGV if ARGV[0] != "gradual"
 
-      def parse_options
-        options, *tail_options = Options.new.parse(ARGV)
-        options[:mode] = :force_update if @env.paths[0..1] == %w[gradual force_update]
-        options[:mode] = :check if @env.paths[0..1] == %w[gradual check]
-        tail_options.unshift(options)
+        case ARGV[1]
+        when "force_update"
+          ARGV[2..] + ["--force-update"]
+        when "check"
+          ARGV[2..] + ["--check"]
+        else
+          raise ArgumentError, "Unknown gradual command #{ARGV[1]}"
+        end
       end
     end
   end

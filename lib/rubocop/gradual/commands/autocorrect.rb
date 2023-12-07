@@ -20,13 +20,13 @@ module RuboCop
           Base.new.call
         end
 
-        private
-
         def lint_paths
           return Configuration.target_file_paths if Configuration.lint_paths.any?
 
           changed_or_untracked_files.map(&:path)
         end
+
+        private
 
         def changed_or_untracked_files
           tracked_files = LockFile.new(Configuration.path).read_results&.files || []

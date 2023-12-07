@@ -23,6 +23,10 @@ module RuboCop
           1
         end
 
+        def lint_paths
+          Configuration.target_file_paths
+        end
+
         private
 
         def run_rubocop
@@ -34,12 +38,6 @@ module RuboCop
             )
           )
           rubocop_runner.run
-        end
-
-        def lint_paths
-          return [] if Configuration.lint_paths.empty?
-
-          Configuration.target_file_paths
         end
 
         def rubocop_options

@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Added
+
+- Add support for the RuboCop `--list` option. ([@skryukov])
+
 ### Fixed
 
-- Respect files passed to rubocop in required mode. ([@skryukov])
+- Respect files passed to RuboCop in required mode. ([@skryukov])
 
 ## [0.3.4] - 2023-10-26
 
