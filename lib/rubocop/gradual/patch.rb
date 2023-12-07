@@ -22,10 +22,10 @@ module RuboCop
       end
 
       def parse_options
-        options, rubocop_options = Options.new.parse(ARGV)
+        options, *tail_options = Options.new.parse(ARGV)
         options[:mode] = :force_update if @env.paths[0..1] == %w[gradual force_update]
         options[:mode] = :check if @env.paths[0..1] == %w[gradual check]
-        [options, rubocop_options]
+        tail_options.unshift(options)
       end
     end
   end

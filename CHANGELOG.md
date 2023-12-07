@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Fixed
+
+- Respect files passed to rubocop in required mode. ([@skryukov])
+
 ## [0.3.4] - 2023-10-26
 
 ### Fixed
