@@ -179,4 +179,42 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
         .and include("RuboCop Gradual got 13 issue(s) fixed, 9 left. Keep going!")
     end
   end
+
+  context "with --list option" do
+    let(:options) { %w[--list --gradual-file] }
+
+    it "lists project files" do
+      expect(gradual_cli).to eq(1)
+      expect($stdout.string.split("\n")).to match_array(Dir.glob("**/*.rb"))
+    end
+
+    context "with --autocorrect option" do
+      let(:options) { %w[--list --autocorrect --gradual-file] }
+
+      it "lists project files" do
+        expect(gradual_cli).to eq(1)
+        expect($stdout.string.split("\n")).to match_array(Dir.glob("**/*.rb"))
+      end
+    end
+
+    context "with --autocorrect option without changes" do
+      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:actual_lock_path) { File.expand_path("full.lock") }
+
+      it "lists project files" do
+        expect(gradual_cli).to eq(1)
+        expect($stdout.string).to eq("")
+      end
+    end
+
+    context "with --autocorrect option and outdated lock file" do
+      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:actual_lock_path) { File.expand_path("outdated.lock") }
+
+      it "lists project files" do
+        expect(gradual_cli).to eq(1)
+        expect($stdout.string).to eq("app/controllers/books_controller.rb\n")
+      end
+    end
+  end
 end

@@ -10,10 +10,18 @@ module RuboCop
       def run(argv = ARGV)
         Configuration.apply(*Options.new.parse(argv))
         puts "Gradual mode: #{Configuration.mode}" if Configuration.debug?
-        load_command(Configuration.command).call.to_i
+        cmd = load_command(Configuration.command)
+        return list_target_files(cmd) if Configuration.rubocop_options[:list_target_files]
+
+        cmd.call.to_i
       end
 
       private
+
+      def list_target_files(cmd)
+        cmd.lint_paths.each { |path| puts PathUtil.relative_path(path) }
+        1
+      end
 
       def load_command(command)
         require_relative "commands/#{command}"
