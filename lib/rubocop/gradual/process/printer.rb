@@ -12,7 +12,7 @@ module RuboCop
         def print_results
           puts diff.statistics if Configuration.debug?
 
-          send "print_#{diff.state}"
+          send :"print_#{diff.state}"
         end
 
         def print_ci_warning(diff)
