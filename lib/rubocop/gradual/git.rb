@@ -14,7 +14,7 @@ module RuboCop
           when :unstaged
             `git ls-files --others --exclude-standard -m`.split("\n")
           when :staged
-            `git diff --cached --name-only`.split("\n")
+            `git diff --cached --name-only --diff-filter=d`.split("\n") # excludes deleted files
           else
             `git diff --name-only #{commit}`.split("\n")
           end
