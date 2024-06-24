@@ -23,7 +23,9 @@ module RuboCop
         printer = Printer.new(diff)
 
         printer.print_results
-        printer.print_ci_warning(lock_file.diff(new_results)) if fail_with_outdated_lock?(diff)
+        if fail_with_outdated_lock?(diff)
+          printer.print_ci_warning(lock_file.diff(new_results), statistics: diff.statistics)
+        end
 
         exit_code = error_code(diff)
         sync_lock_file(diff) if exit_code.zero?
