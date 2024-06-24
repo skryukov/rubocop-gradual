@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.3.5] - 2024-06-24
+
 ### Added
 
 - Add support for the RuboCop `--list` option. ([@skryukov])
@@ -116,7 +118,8 @@ RuboCop::Gradual::RakeTask.new
 [@dmorgan-fa]: https://github.com/dmorgan-fa
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.5...HEAD
+[0.3.5]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.3...v0.3.4
 [0.3.3]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.1...v0.3.2
