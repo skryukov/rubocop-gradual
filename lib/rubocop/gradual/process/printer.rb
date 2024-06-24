@@ -15,13 +15,16 @@ module RuboCop
           send :"print_#{diff.state}"
         end
 
-        def print_ci_warning(diff)
+        def print_ci_warning(diff, statistics:)
           puts <<~MSG
             \n#{bold("Unexpected Changes!")}
 
             RuboCop Gradual lock file is outdated, to fix this message:
-            - Run `rubocop-gradual` locally and commit the results, or
-            - EVEN BETTER: before doing the above, try to fix the remaining issues in those files!
+            - Run `rubocop-gradual` locally and commit the results#{
+              if statistics[:unchanged] != statistics[:left]
+                ", or\n- EVEN BETTER: before doing the above, try to fix the remaining issues in those files!"
+              end
+            }
 
             #{bold("`#{Configuration.path}` diff:")}
 

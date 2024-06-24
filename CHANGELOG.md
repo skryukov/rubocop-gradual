@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning].
 ### Fixed
 
 - Respect files passed to RuboCop in required mode. ([@skryukov])
+- Exclude deleted files when running `--staged`. ([@dmorgan-fa])
+- Don't show "EVEN BETTER" instruction when all issues are fixed. ([@skryukov])
 
 ## [0.3.4] - 2023-10-26
 
@@ -111,6 +113,7 @@ RuboCop::Gradual::RakeTask.new
 
 - Initial implementation. ([@skryukov])
 
+[@dmorgan-fa]: https://github.com/dmorgan-fa
 [@skryukov]: https://github.com/skryukov
 
 [Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.4...HEAD

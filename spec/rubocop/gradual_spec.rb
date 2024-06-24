@@ -23,7 +23,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     $stderr = STDERR
   end
 
-  shared_examples "error with --check option" do
+  shared_examples "error with --check option" do |with_extended_steps: true|
     context "with --check option" do
       let(:options) { super().unshift("--check") }
 
@@ -38,6 +38,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       it "returns error" do
         expect(gradual_cli).to eq(1)
         expect($stdout.string).to include("Unexpected Changes!")
+          .and(with_extended_steps ? include("EVEN BETTER") : not_include("EVEN BETTER"))
       end
     end
   end
@@ -150,7 +151,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       expect($stdout.string).to include("RuboCop Gradual got 2 issue(s) fixed, 22 left. Keep going!")
     end
 
-    include_examples "error with --check option"
+    include_examples "error with --check option", with_extended_steps: false
   end
 
   context "when no issues found" do
@@ -163,7 +164,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       expect($stdout.string).to include("RuboCop Gradual is complete!")
     end
 
-    include_examples "error with --check option"
+    include_examples "error with --check option", with_extended_steps: false
   end
 
   context "with --autocorrect option" do
