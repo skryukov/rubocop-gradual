@@ -167,6 +167,25 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     include_examples "error with --check option", with_extended_steps: false
   end
 
+  context "when no lock file and no issues found" do
+    let(:options) { %w[--config security_only_rubocop.yml --gradual-file] }
+    let(:actual_lock_path) { File.expand_path("no.lock") }
+
+    it "removes file" do
+      expect(gradual_cli).to eq(0)
+      expect($stdout.string).to include("RuboCop Gradual is complete!")
+    end
+
+    context "with --check option" do
+      let(:options) { super().unshift("--check") }
+
+      it "returns success and doesn't update file" do
+        expect(gradual_cli).to eq(0)
+        expect($stdout.string).to include("RuboCop Gradual is complete!")
+      end
+    end
+  end
+
   context "with --autocorrect option" do
     let(:options) { %w[--autocorrect --gradual-file] }
     let(:actual_lock_path) { File.expand_path("full.lock") }
