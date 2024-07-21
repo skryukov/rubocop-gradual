@@ -35,7 +35,10 @@ module RuboCop
       private
 
       def fail_with_outdated_lock?(diff)
-        Configuration.mode == :check && diff.state != :no_changes
+        return false if Configuration.mode != :check
+        return false if diff.state == :complete && old_results.nil?
+
+        diff.state != :no_changes
       end
 
       def sync_lock_file(diff)
