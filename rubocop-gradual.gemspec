@@ -28,6 +28,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir.glob("lib/**/*") + %w[exe/rubocop-gradual README.md LICENSE.txt CHANGELOG.md]
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "benchmark", ">=0.5.0"
   spec.add_dependency "diff-lcs", ">= 1.2.0", "< 2.0"
   spec.add_dependency "diffy", "~> 3.0"
   spec.add_dependency "parallel", "~> 1.10"
