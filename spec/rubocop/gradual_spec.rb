@@ -196,7 +196,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       expect(actual_data).to eq(expected_data)
       expect($stdout.string).to include("Inspecting 3 file(s) for autocorrection...")
         .and include("Fixed 2 file(s).")
-        .and include("RuboCop Gradual got 13 issue(s) fixed, 9 left. Keep going!")
+        .and include("RuboCop Gradual got 14 issue(s) fixed, 8 left. Keep going!")
     end
   end
 
