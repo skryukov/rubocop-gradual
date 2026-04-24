@@ -29,7 +29,7 @@ module RuboCop
         private
 
         def prepare_issues(issues)
-          issues.map { |issue| Issue.new(**issue.merge(hash: issue_hash(issue))) }
+          issues.map { |issue| Issue.new(**issue, hash: issue_hash(issue)) }
         end
 
         def issue_hash(issue)
