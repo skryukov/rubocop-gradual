@@ -78,6 +78,8 @@ module RuboCop
         opts.on("--commit COMMIT", "Lint files changed since the commit.") do |commit|
           @lint_paths = git_lint_paths(commit)
         end
+
+        opts.on("--list", "--list-target-files", "List target files.") { @rubocop_options[:list_target_files] = true }
       end
 
       def define_info_options(opts)
