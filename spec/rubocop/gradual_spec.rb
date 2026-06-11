@@ -222,7 +222,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
   end
 
   context "with --list option" do
-    let(:options) { %w[--list-target-files --gradual-file] }
+    let(:options) { %w[--list --gradual-file] }
 
     it "lists project files" do
       expect(gradual_cli).to eq(1)
@@ -230,7 +230,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option" do
-      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
+      let(:options) { %w[--list --autocorrect --gradual-file] }
 
       it "lists project files" do
         expect(gradual_cli).to eq(1)
@@ -239,7 +239,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option without changes" do
-      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
+      let(:options) { %w[--list --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("full.lock") }
 
       it "lists project files" do
@@ -249,12 +249,23 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option and outdated lock file" do
-      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
+      let(:options) { %w[--list --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("outdated.lock") }
 
       it "lists project files" do
         expect(gradual_cli).to eq(1)
         expect($stdout.string).to eq("app/controllers/books_controller.rb\n")
+      end
+    end
+
+    %w[-L --list-target-files].each do |alias_flag|
+      context "with #{alias_flag} alias" do
+        let(:options) { [alias_flag, "--gradual-file"] }
+
+        it "lists project files" do
+          expect(gradual_cli).to eq(1)
+          expect($stdout.string.split("\n")).to match_array(Dir.glob("**/*.rb"))
+        end
       end
     end
   end
