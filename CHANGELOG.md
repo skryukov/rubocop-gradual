@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Added
+
+- Support RuboCop's `--parallel` option. Previously the flag was silently dropped before reaching the RuboCop runner. ([@skryukov])
+
 ## [0.3.6] - 2024-07-21
 
 ### Fixed

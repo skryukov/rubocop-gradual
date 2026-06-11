@@ -42,7 +42,7 @@ module RuboCop
 
         def rubocop_options
           Configuration.rubocop_options
-                       .slice(:config, :debug, :display_time)
+                       .slice(:config, :debug, :display_time, :parallel)
                        .merge(formatters: [[Formatters::Base, nil]])
         end
 
