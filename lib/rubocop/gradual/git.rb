@@ -23,8 +23,7 @@ module RuboCop
         private
 
         def git_installed!
-          void = /msdos|mswin|djgpp|mingw/.match?(RbConfig::CONFIG["host_os"]) ? "NUL" : "/dev/null"
-          git_found = `git --version >>#{void} 2>&1`
+          git_found = `git --version >>#{File::NULL} 2>&1`
 
           raise Error, "Git is not found, please install it first." unless git_found
         end

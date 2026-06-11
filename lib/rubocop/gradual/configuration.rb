@@ -5,14 +5,18 @@ module RuboCop
     # Configuration class stores Gradual and Rubocop options.
     module Configuration
       class << self
-        attr_reader :options, :rubocop_options, :rubocop_results, :lint_paths, :target_file_paths
+        attr_reader :options, :rubocop_options, :rubocop_results, :lint_paths
 
         def apply(options = {}, rubocop_options = {}, lint_paths = [])
           @options = options
           @rubocop_options = rubocop_options
           @lint_paths = lint_paths
-          @target_file_paths = rubocop_target_file_paths
+          @target_file_paths = nil
           @rubocop_results = []
+        end
+
+        def target_file_paths
+          @target_file_paths ||= rubocop_target_file_paths
         end
 
         def command

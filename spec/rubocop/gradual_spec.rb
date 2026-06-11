@@ -9,7 +9,10 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       project_path = File.join("spec/fixtures/project")
       FileUtils.cp_r(project_path, tmpdir)
 
-      Dir.chdir(File.join(tmpdir, "project")) { example.run }
+      Dir.chdir(File.join(tmpdir, "project")) do
+        RuboCop::PathUtil.reset_pwd if RuboCop::PathUtil.respond_to?(:reset_pwd)
+        example.run
+      end
     end
   end
 
@@ -187,21 +190,29 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
   end
 
   context "with --autocorrect option" do
+    # RuboCop 1.66 added autocorrection for Lint/UselessAssignment,
+    # so one more issue gets fixed on modern RuboCop versions.
+    def new_autocorrect?
+      Gem::Version.new(RuboCop::Version::STRING) >= Gem::Version.new("1.66")
+    end
+
     let(:options) { %w[--autocorrect --gradual-file] }
     let(:actual_lock_path) { File.expand_path("full.lock") }
-    let(:expected_lock_path) { File.expand_path("autocorrected.lock") }
+    let(:expected_lock_path) do
+      File.expand_path(new_autocorrect? ? "autocorrected.lock" : "autocorrected_legacy.lock")
+    end
 
     it "updates file" do
       expect(gradual_cli).to eq(0)
       expect(actual_data).to eq(expected_data)
       expect($stdout.string).to include("Inspecting 3 file(s) for autocorrection...")
         .and include("Fixed 2 file(s).")
-        .and include("RuboCop Gradual got 13 issue(s) fixed, 9 left. Keep going!")
+        .and include(new_autocorrect? ? "got 14 issue(s) fixed, 8 left" : "got 13 issue(s) fixed, 9 left")
     end
   end
 
   context "with --list option" do
-    let(:options) { %w[--list --gradual-file] }
+    let(:options) { %w[--list-target-files --gradual-file] }
 
     it "lists project files" do
       expect(gradual_cli).to eq(1)
@@ -209,7 +220,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
 
       it "lists project files" do
         expect(gradual_cli).to eq(1)
@@ -218,7 +229,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option without changes" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("full.lock") }
 
       it "lists project files" do
@@ -228,7 +239,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option and outdated lock file" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("outdated.lock") }
 
       it "lists project files" do
