@@ -62,6 +62,16 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
 
   include_examples "error with --check option"
 
+  context "with --parallel option" do
+    let(:options) { %w[--parallel --gradual-file] }
+
+    it "writes the same full file" do
+      expect(gradual_cli).to eq(0)
+      expect(actual_data).to eq(expected_data)
+      expect($stdout.string).to include("RuboCop Gradual got results for the first time. 22 issue(s) found.")
+    end
+  end
+
   context "when the lock file is outdated" do
     let(:actual_lock_path) { File.expand_path("outdated.lock") }
     let(:expected_lock_path) { File.expand_path("full.lock") }

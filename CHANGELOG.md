@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+### Added
+
+- Support RuboCop's `--parallel` option. Previously the flag was silently dropped before reaching the RuboCop runner. ([@skryukov])
+
 ### Fixed
 
 - Define `--list` (`--list-target-files`) as a native rubocop-gradual option. Previously it relied on OptionParser expanding the abbreviation to RuboCop's `--list-target-files`, which broke with RuboCop >= 1.87 where `--list` became ambiguous. ([@skryukov])
