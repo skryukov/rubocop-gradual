@@ -56,8 +56,7 @@ module RuboCop
 
       def define_gradual_options(opts)
         opts.on("-a", "--autocorrect", "Autocorrect offenses (only when it's safe).") do
-          @rubocop_options[AUTOCORRECT_KEY] = true
-          @rubocop_options[:"safe_#{AUTOCORRECT_KEY}"] = true
+          @rubocop_options[AUTOCORRECT_KEY] = @rubocop_options[:"safe_#{AUTOCORRECT_KEY}"] = true
           @options[:command] = :autocorrect
         end
         opts.on("-A", "--autocorrect-all", "Autocorrect offenses (safe and unsafe).") do
@@ -66,6 +65,8 @@ module RuboCop
         end
 
         opts.on("--gradual-file FILE", "Specify Gradual lock file.") { |path| @options[:path] = path }
+
+        opts.on("--standard", "Lint with the Standard ruleset.") { @options[:standard] = true }
       end
 
       def define_lint_paths_options(opts)
