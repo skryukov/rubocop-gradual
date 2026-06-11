@@ -50,6 +50,7 @@ Proposed workflow:
     -a, --autocorrect                Autocorrect offenses (only when it's safe).
     -A, --autocorrect-all            Autocorrect offenses (safe and unsafe).
         --gradual-file FILE          Specify Gradual lock file.
+        --standard                   Lint with the Standard ruleset.
         --list, --list-target-files  List target files.
     -v, --version                    Display version.
     -h, --help                       Prints this help.
@@ -103,6 +104,17 @@ rubocop-gradual --commit origin/main # run `rubocop-gradual` on changed files si
 # it's possible to combine options with autocorrect:
 rubocop-gradual --staged --autocorrect # run `rubocop-gradual` with autocorrect on staged files
 ```
+
+## Standard support (experimental)
+
+RuboCop Gradual can lint with the [Standard] ruleset instead of a RuboCop configuration. Add the [standard gem] to your Gemfile and pass the `--standard` option:
+
+```shell
+rubocop-gradual --standard # run `rubocop-gradual` with the Standard ruleset
+rubocop-gradual --standard -a # run `rubocop-gradual` with the Standard ruleset and autocorrect
+```
+
+RuboCop Gradual picks up `.standard.yml` and `.standard_todo.yml` configuration files, so existing Standard setups work as is.
 
 ## Require mode (experimental)
 
@@ -159,6 +171,8 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/skryuk
 The gem is available as open source under the terms of the [MIT License].
 
 [lefthook]: https://github.com/evilmartians/lefthook
+[Standard]: https://github.com/standardrb/standard
+[standard gem]: https://rubygems.org/gems/standard
 [RuboCop TODO file]: https://docs.rubocop.org/rubocop/configuration.html#automatically-generated-configuration
 [Pronto]: https://github.com/prontolabs/pronto-rubocop
 [Betterer]: https://github.com/phenomnomnominal/betterer

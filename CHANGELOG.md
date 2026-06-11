@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning].
 
 ### Added
 
+- Add `--standard` option to lint with the [Standard](https://github.com/standardrb/standard) ruleset, including `.standard.yml` and `.standard_todo.yml` support. ([@skryukov])
 - Support RuboCop's `--parallel` option. Previously the flag was silently dropped before reaching the RuboCop runner. ([@skryukov])
 
 ### Fixed

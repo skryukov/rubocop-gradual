@@ -12,6 +12,7 @@ module RuboCop
           @rubocop_options = rubocop_options
           @lint_paths = lint_paths
           @target_file_paths = nil
+          @standard_config_store = nil
           @rubocop_results = []
         end
 
@@ -40,12 +41,27 @@ module RuboCop
         end
 
         def rubocop_config_store
+          return standard_config_store if options[:standard]
+
           RuboCop::ConfigStore.new.tap do |config_store|
             config_store.options_config = rubocop_options[:config] if rubocop_options[:config]
           end
         end
 
         private
+
+        def standard_config_store
+          @standard_config_store ||= begin
+            require_standard
+            Standard::BuildsConfig.new.call([]).rubocop_config_store
+          end
+        end
+
+        def require_standard
+          require "standard"
+        rescue LoadError
+          raise Error, "Standard is not found, please add `gem \"standard\"` to your Gemfile first."
+        end
 
         def rubocop_target_file_paths
           target_finder = RuboCop::TargetFinder.new(rubocop_config_store, rubocop_options)
