@@ -50,6 +50,7 @@ Proposed workflow:
     -a, --autocorrect                Autocorrect offenses (only when it's safe).
     -A, --autocorrect-all            Autocorrect offenses (safe and unsafe).
         --gradual-file FILE          Specify Gradual lock file.
+        --list, --list-target-files  List target files.
     -v, --version                    Display version.
     -h, --help                       Prints this help.
 ```
