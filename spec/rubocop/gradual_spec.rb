@@ -9,7 +9,10 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
       project_path = File.join("spec/fixtures/project")
       FileUtils.cp_r(project_path, tmpdir)
 
-      Dir.chdir(File.join(tmpdir, "project")) { example.run }
+      Dir.chdir(File.join(tmpdir, "project")) do
+        RuboCop::PathUtil.reset_pwd if RuboCop::PathUtil.respond_to?(:reset_pwd)
+        example.run
+      end
     end
   end
 
@@ -201,7 +204,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
   end
 
   context "with --list option" do
-    let(:options) { %w[--list --gradual-file] }
+    let(:options) { %w[--list-target-files --gradual-file] }
 
     it "lists project files" do
       expect(gradual_cli).to eq(1)
@@ -209,7 +212,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
 
       it "lists project files" do
         expect(gradual_cli).to eq(1)
@@ -218,7 +221,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option without changes" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("full.lock") }
 
       it "lists project files" do
@@ -228,7 +231,7 @@ RSpec.describe RuboCop::Gradual, :aggregate_failures do
     end
 
     context "with --autocorrect option and outdated lock file" do
-      let(:options) { %w[--list --autocorrect --gradual-file] }
+      let(:options) { %w[--list-target-files --autocorrect --gradual-file] }
       let(:actual_lock_path) { File.expand_path("outdated.lock") }
 
       it "lists project files" do
