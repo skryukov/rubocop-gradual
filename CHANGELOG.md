@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning].
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-11
+
 ### Added
 
 - Add `--standard` option to lint with the [Standard](https://github.com/standardrb/standard) ruleset, including `.standard.yml` and `.standard_todo.yml` support. ([@skryukov])
@@ -133,7 +135,8 @@ RuboCop::Gradual::RakeTask.new
 [@dmorgan-fa]: https://github.com/dmorgan-fa
 [@skryukov]: https://github.com/skryukov
 
-[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.6...HEAD
+[Unreleased]: https://github.com/skryukov/rubocop-gradual/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.6...v0.4.0
 [0.3.6]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.4...v0.3.5
 [0.3.4]: https://github.com/skryukov/rubocop-gradual/compare/v0.3.3...v0.3.4
